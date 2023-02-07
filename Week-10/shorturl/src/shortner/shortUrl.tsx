@@ -1,12 +1,12 @@
 import axios                from 'axios';
 import React, { useState }  from 'react'
-import "./shortUrl.css"
 import UrlInput             from './urlInput'
 import UrlList              from './urlList'
+import                      "./shortUrl.css"
 
 interface urlShortProps{
-  text?: string;
-  id?: any;
+  text?:  string;
+  id?:    any;
 }
 
 

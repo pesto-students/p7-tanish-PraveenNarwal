@@ -1,5 +1,5 @@
 import React from 'react'
-import "./urlList.css"
+import        "./urlList.css"
 
 const UrlList = (props: any) => {
   return (

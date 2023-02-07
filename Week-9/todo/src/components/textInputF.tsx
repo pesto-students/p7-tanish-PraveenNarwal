@@ -2,9 +2,9 @@ import { Button, TextField }  from "@material-ui/core";
 import React, { FC }          from "react";
 
 interface textFieldProps {
-  todoList:     string;
-  setTodoList:  React.Dispatch<React.SetStateAction<string>>
-  taskValue?:   string;
+  todoList:       string;
+  setTodoList:    React.Dispatch<React.SetStateAction<string>>
+  taskValue?:     string;
   handleclickAdd: (e: React.FormEvent) => void;
 }
 
