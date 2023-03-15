@@ -1,0 +1,274 @@
+-- Online SQL Editor to Run SQL Online.
+-- Use the editor to create new tables, insert data and all other SQL operations.
+  
+CREATE TABLE cities(
+    city_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    city VARCHAR(20),
+    state VARCHAR(20)
+);
+
+CREATE TABLE warehouses(
+    wid INTEGER PRIMARY KEY AUTOINCREMENT,
+    wname VARCHAR(30),
+    location VARCHAR(20),
+    extra_context JSON,
+    city_id INTEGER NOT NULL,
+    FOREIGN KEY (city_id) REFERENCES cities(city_id)
+);
+CREATE TABLE stores(
+    sid INTEGER PRIMARY KEY AUTOINCREMENT,
+    store_name VARCHAR(30),
+    location_city VARCHAR(20),
+    warehouse_id INTEGER NOT NULL,
+    FOREIGN KEY (warehouse_id) REFERENCES warehouses(wid)
+);
+CREATE TABLE customers(
+    cno INTEGER PRIMARY KEY AUTOINCREMENT,
+    cname VARCHAR(50),
+    addr VARCHAR(50)
+);
+CREATE TABLE orders(
+    ono INTEGER PRIMARY KEY AUTOINCREMENT,
+    odate DATE,
+    customer_id INTEGER NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES customers(cno)
+);
+CREATE TABLE items(
+    item_o INTEGER PRIMARY KEY AUTOINCREMENT,
+    description_text VARCHAR(50),
+    weight DECIMAL(5, 2),
+    cost DECIMAL(5, 2) NOT NULL
+);
+
+CREATE TABLE itemOrderRelation(
+    relation_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    item_id INTEGER NOT NULL,
+    order_id INTEGER NOT NULL,
+    order_quantity INTEGER NOT NULL,
+    FOREIGN KEY (item_id) REFERENCES items(item_o),
+    FOREIGN KEY (order_id) REFERENCES orders(ono)
+);
+
+CREATE TABLE storesItemRelation(
+    relation_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    store_id INTEGER NOT NULL,
+    item_id INTEGER NOT NULL,
+    quantity INTEGER NOT NULL,
+    FOREIGN KEY (store_id) REFERENCES stores(sid),
+    FOREIGN KEY (item_id) REFERENCES items(item_o)
+);
+
+
+
+
+
+INSERT INTO
+    cities(city, state)
+VALUES
+    ("Hisar", "Haryana");
+INSERT INTO
+    cities(city, state)
+VALUES
+    ("sirsa", "UP");
+INSERT INTO
+    cities(city, state)
+VALUES
+    ("kaithal", "Punjab");
+INSERT INTO
+    cities(city, state)
+VALUES
+    ("Nagpur", "Mumbai");
+INSERT INTO
+    warehouses(wname, location, extra_context, city_id)
+VALUES
+    ("grocery", "rds 33", '{"context": 1}', 1);
+INSERT INTO
+    warehouses(wname, location, extra_context, city_id)
+VALUES
+    ("food", "rds 32", '{"context": 12}', 2);
+INSERT INTO
+    warehouses(wname, location, extra_context, city_id)
+VALUES
+    ("Steel", "rds 3", '{"context": 1}', 3);
+
+INSERT INTO
+    stores (store_name, location_city, warehouse_id)
+VALUES
+    ("grocery store", "hisar", 1);
+INSERT INTO
+    stores (store_name, location_city, warehouse_id)
+VALUES
+    ("Apple store", "delhi city", 2);
+INSERT INTO
+    stores (store_name, location_city, warehouse_id)
+VALUES
+    ("Food store", "jaipur city", 3);
+    
+    INSERT INTO
+    stores (store_name, location_city, warehouse_id)
+VALUES
+    ("shoe store", "hisar", 4);
+INSERT INTO
+    stores (store_name, location_city, warehouse_id)
+VALUES
+    ("Atore store", "delhi city", 5);
+INSERT INTO
+    stores (store_name, location_city, warehouse_id)
+VALUES
+    ("Bowl store", "jaipur city", 6);
+    INSERT INTO
+    stores (store_name, location_city, warehouse_id)
+VALUES
+    ("paint store", "hisar", 7);
+INSERT INTO
+    stores (store_name, location_city, warehouse_id)
+VALUES
+    ("Atore", "delhi city", 8);
+INSERT INTO
+    stores (store_name, location_city, warehouse_id)
+VALUES
+    ("egg store", "jaipur city", 9);
+    INSERT INTO
+    stores (store_name, location_city, warehouse_id)
+VALUES
+    ("Glass store", "hisar", 10);
+
+INSERT INTO
+    customers (cname, addr)
+VALUES
+    ("akash", "Sector-15");
+INSERT INTO
+    customers (cname, addr)
+VALUES
+    ("vkash", "Sector-151");
+INSERT INTO
+    customers (cname, addr)
+VALUES
+    ("Dakash", "Sector-215");
+INSERT INTO
+    customers (cname, addr)
+VALUES
+    ("aish", "Sector-15s2");
+ INSERT INTO
+    customers (cname, addr)
+VALUES
+    ("akash", "Sector-15s");
+INSERT INTO
+    customers (cname, addr)
+VALUES
+    ("vkash", "Sector-15dd1");
+INSERT INTO
+    customers (cname, addr)
+VALUES
+    ("Dakash", "Sector-a215");
+INSERT INTO
+    customers (cname, addr)
+VALUES
+    ("aish", "Sector-1a2");
+
+INSERT INTO
+    orders (odate, customer_id)
+VALUES
+    ('2-1-2023', 1);
+INSERT INTO
+    orders (odate, customer_id)
+VALUES
+    ('28-2-2023', 2);
+INSERT INTO
+    orders (odate, customer_id)
+VALUES
+    ('25-12-2023', 3);
+INSERT INTO
+    orders (odate, customer_id)
+VALUES
+    ('20-2-2023', 4);
+    
+    INSERT INTO
+    orders (odate, customer_id)
+VALUES
+    ('2-1-2023', 5);
+INSERT INTO
+    orders (odate, customer_id)
+VALUES
+    ('28-5-2023', 6);
+INSERT INTO
+    orders (odate, customer_id)
+VALUES
+    ('25-12-2023', 7);
+INSERT INTO
+    orders (odate, customer_id)
+VALUES
+    ('30-2-2023', 8);
+
+
+
+INSERT INTO
+    items(description_text, weight, cost)
+VALUES("Oats", 12.00, 10.00);
+INSERT INTO
+    items(description_text, weight, cost)
+VALUES("Milk", 1.00, 2.00);
+INSERT INTO
+    items(description_text, weight, cost)
+VALUES("Grapes", 21.00, 1.00);
+
+INSERT INTO
+    items(description_text, weight, cost)
+VALUES("Apple", 12.00, 10.00);
+INSERT INTO
+    items(description_text, weight, cost)
+VALUES("Almonds", 13.00, 21.00);
+INSERT INTO
+    items(description_text, weight, cost)
+VALUES("Mango", 21.00, 12.00);
+
+INSERT INTO
+    itemOrderRelation (item_id, order_id, order_quantity)
+VALUES
+    (1, 1, 40);
+INSERT INTO
+    itemOrderRelation (item_id, order_id, order_quantity)
+VALUES
+    (2, 2, 12);
+INSERT INTO
+    itemOrderRelation (item_id, order_id, order_quantity)
+VALUES
+    (1, 4, 43);
+INSERT INTO
+    itemOrderRelation (item_id, order_id, order_quantity)
+VALUES
+    (3, 1, 33);
+INSERT INTO
+    itemOrderRelation (item_id, order_id, order_quantity)
+VALUES
+    (2, 3, 63);
+INSERT INTO
+    itemOrderRelation (item_id, order_id, order_quantity)
+VALUES
+    (1, 4, 22);
+
+INSERT INTO
+    storesItemRelation (store_id, item_id, quantity)
+VALUES
+    (1, 2, 10);
+    
+INSERT INTO
+    storesItemRelation (store_id, item_id, quantity)
+VALUES
+    (2, 3, 1);
+    
+INSERT INTO
+    storesItemRelation (store_id, item_id, quantity)
+VALUES
+    (1, 5, 100);
+    
+INSERT INTO
+    storesItemRelation (store_id, item_id, quantity)
+VALUES
+    (3, 3, 20);
+    
+ INSERT INTO
+    storesItemRelation (store_id, item_id, quantity)
+VALUES
+    (4, 5, 50);
+    
