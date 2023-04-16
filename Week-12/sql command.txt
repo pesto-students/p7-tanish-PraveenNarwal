@@ -1,0 +1,22 @@
+SELECT  MIN(weight) FROM items;
+
+
+
+
+SELECT DISTINCT * FROM warehouses LEFT join cities ON warehouses.city_id = cities.city_id WHERE
+    cities.city = "Hisar";
+    
+
+SELECT * FROM items WHERE item_o IN (
+  SELECT item_id FROM itemOrderRelation WHERE order_id IN (
+    SELECT ono FROM orders WHERE customer_id IN (
+       SELECT  cno FROM customers  WHERE cname = "akash" )));
+
+
+SELECT COUNT(store_name)
+FROM stores ;
+
+
+SELECT * FROM items LEFT join itemOrderRelation ON items.item_o = item_id  where 
+itemOrderRelation.item_id = (
+SELECT MIN(order_quantity) FROM itemOrderRelation);
